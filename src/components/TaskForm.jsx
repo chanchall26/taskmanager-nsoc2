@@ -6,12 +6,18 @@ export default function TaskForm({ onAddTask, historyMode, onToggleHistory }) {
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState('medium');
   const [isPressed, setIsPressed] = useState(false);
+  const [error, setError] = useState('');
   const inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      setError('Please enter a task title.');
+      inputRef.current?.focus();
+      return;
+    }
+    setError('');
 
     onAddTask({
       text: trimmed,
@@ -29,16 +35,23 @@ export default function TaskForm({ onAddTask, historyMode, onToggleHistory }) {
   };
 
   return (
-    <form id="todo-form" aria-label="Add new task" onSubmit={handleSubmit}>
-      <input
-        ref={inputRef}
-        id="todo-input"
-        type="text"
-        placeholder="New Task..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        required
-      />
+    <>
+      <form id="todo-form" aria-label="Add new task" onSubmit={handleSubmit}>
+        <input
+          ref={inputRef}
+          id="todo-input"
+          type="text"
+          placeholder="New Task..."
+          aria-label="New task title"
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? 'todo-form-error' : undefined}
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+            if (error) setError('');
+          }}
+          required
+        />
       <input
         id="todo-date"
         type="date"
@@ -72,5 +85,9 @@ export default function TaskForm({ onAddTask, historyMode, onToggleHistory }) {
         {historyMode ? 'Back to tasks' : 'History'}
       </button>
     </form>
+    <p id="todo-form-error" className="form-error" role="alert">
+      {error}
+    </p>
+    </>
   );
 }

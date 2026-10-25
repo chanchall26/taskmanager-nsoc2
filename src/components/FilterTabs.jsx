@@ -16,6 +16,7 @@ export default function FilterTabs({ currentFilter, onSelectFilter }) {
           type="button"
           data-filter={option.id}
           className={`filter-btn ${currentFilter === option.id ? 'active' : ''}`}
+          aria-pressed={currentFilter === option.id}
           onClick={() => onSelectFilter(option.id)}
         >
           {option.label}
