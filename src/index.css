@@ -128,6 +128,29 @@ button:active,
   outline-offset: 2px;
 }
 
+/* Controls below set `outline: none`; restore a visible focus ring for keyboard users */
+#todo-form input:focus-visible,
+#todo-form select:focus-visible,
+#task-search:focus-visible,
+#task-sort:focus-visible,
+.edit-input:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Form validation error (announced via role="alert" in TaskForm) */
+.form-error {
+  min-height: 16px;
+  margin: 6px 2px 0;
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.form-error:empty {
+  margin: 0;
+}
+
 .num, .stat-value, .progress-percent {
   font-variant-numeric: tabular-nums;
 }
@@ -701,7 +724,8 @@ h1 {
   align-items: center;
 }
 
-#todo-list li .done-button {
+#todo-list li .done-button,
+#todo-list li .edit-button {
   flex: 0 0 auto;
   padding: 5px 10px;
   border: 1px solid var(--border);
@@ -713,7 +737,8 @@ h1 {
   transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
 }
 
-#todo-list li .done-button:hover {
+#todo-list li .done-button:hover,
+#todo-list li .edit-button:hover {
   background-color: var(--active);
   color: var(--text);
 }

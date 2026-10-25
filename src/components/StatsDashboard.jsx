@@ -9,7 +9,7 @@ export default function StatsDashboard({ tasks, currentFilter, onSelectFilter })
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <section id="stats-dashboard" class="stats-dashboard" className="stats-dashboard" aria-label="Productivity overview">
+    <section id="stats-dashboard" className="stats-dashboard" aria-label="Productivity overview">
       <div className="stats-grid">
         <button
           type="button"
@@ -17,6 +17,7 @@ export default function StatsDashboard({ tasks, currentFilter, onSelectFilter })
           data-stat-filter="all"
           onClick={() => onSelectFilter('all')}
           aria-label="Filter all tasks"
+          aria-pressed={currentFilter === 'all'}
         >
           <span className="stat-value" id="stat-total">{total}</span>
           <span className="stat-label">Total</span>
@@ -27,6 +28,7 @@ export default function StatsDashboard({ tasks, currentFilter, onSelectFilter })
           data-stat-filter="active"
           onClick={() => onSelectFilter('active')}
           aria-label="Filter active tasks"
+          aria-pressed={currentFilter === 'active'}
         >
           <span className="stat-value" id="stat-active">{active}</span>
           <span className="stat-label">Active</span>
@@ -37,6 +39,7 @@ export default function StatsDashboard({ tasks, currentFilter, onSelectFilter })
           data-stat-filter="done"
           onClick={() => onSelectFilter('done')}
           aria-label="Filter completed tasks"
+          aria-pressed={currentFilter === 'done'}
         >
           <span className="stat-value" id="stat-completed">{completed}</span>
           <span className="stat-label">Completed</span>
@@ -47,6 +50,7 @@ export default function StatsDashboard({ tasks, currentFilter, onSelectFilter })
           data-stat-filter="overdue-task"
           onClick={() => onSelectFilter('overdue-task')}
           aria-label="Filter overdue tasks"
+          aria-pressed={currentFilter === 'overdue-task'}
         >
           <span className="stat-value" id="stat-overdue">{overdue}</span>
           <span className="stat-label">Overdue</span>

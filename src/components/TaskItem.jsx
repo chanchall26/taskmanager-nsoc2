@@ -78,6 +78,14 @@ export default function TaskItem({ task, onToggleComplete, onDelete, onUpdateTex
       <div className="action-buttons">
         <button
           type="button"
+          className="edit-button"
+          aria-label={`Edit task ${task.text}`}
+          onClick={() => setIsEditing(true)}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
           className="done-button"
           onClick={() => onToggleComplete(task)}
         >
